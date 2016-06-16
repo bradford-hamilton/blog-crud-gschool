@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.text('content');
     table.integer('post_id').references('post.id');
-    table.integer('user_id').references('user.id');
+    table.integer('user_id').references('users.id');
   });
 };
 
