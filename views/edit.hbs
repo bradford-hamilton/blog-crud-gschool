@@ -9,8 +9,8 @@
         <input value='{{post.title}}' type="text" name='title' class="form-control" id="title" placeholder="Enter Title">
       </fieldset>
       <fieldset class="form-group">
-        <label value='{{post.content}}' for="content">Post Content</label>
-        <textarea class="form-control" name='content' id="description" rows="3"></textarea>
+        <label for="content">Post Content</label>
+        <textarea class="form-control" name='content' id="description" rows="3">{{post.content}}</textarea>
       </fieldset>
       <button type="submit" class="btn btn-primary">Post</button>
     </form>

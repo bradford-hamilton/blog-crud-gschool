@@ -7,7 +7,6 @@ var knex = require('../db/knex');
 router.get('/', function(request, response) {
   knex('users')
     .join('post', 'users.id', 'post.user_id')
-    .fullOuterJoin('comment', 'post.id', 'post_id')
     .select()
     .then(function(data) {
       console.log(data);
@@ -35,12 +34,17 @@ router.put('/:id/edit', function(request, response) {
 
 //update/delete violates foreign key constraint
 router.get('/:id/delete', function(request, response) {
-  knex('post').where({ id: request.params.id }).del()
-    .then(function() {
-      response.redirect('/blog');
-    });
+    knex('comment').where({ post_id: request.params.id }).del()
+  .then(function() {
+    return knex('post').where({ id: request.params.id }).del()
+  .then(function() {
+    response.redirect('/blog');
+  });
 });
 
+});
+
+// where i want the comments
 router.get('/:id', function(request, response) {
   knex('post').where({ id: request.params.id }).first()
     .then(function(post){
@@ -53,7 +57,7 @@ router.post('/add', function(request, response) {
   knex('users').first().returning('id').insert({ username: request.body.username })
 
     .then(function(userid) {
-      return knex('post').insert({ content: request.body.content, user_id: userid[0] });
+      return knex('post').insert({ title: request.body.title, content: request.body.content, user_id: userid[0] });
     })
     .then(function() {
       response.redirect('/blog');
