@@ -1,7 +1,27 @@
 body {
-  padding: 50px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #ffeccf;
 }
+
+/* Nav */
+#brand {
+  font-family: 'Playfair Display', serif;
+  text-shadow: 1px 1px 3px #c1c1c1;
+  text-decoration: none;
+  color: #222222;
+  font-size: 3.5rem;
+}
+
+#brand:hover {
+  text-shadow: .5px .5px 1px #000000;
+}
+
+.navigation {
+  background-color: hsla(0, 1%, 60%, 0.69);
+  height: 8rem;
+}
+/***/
 
 a {
   color: #00B7FF;

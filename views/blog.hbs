@@ -1,0 +1,17 @@
+<h1>Blogs</h1>
+<br><br><br><br>
+<ul class='container-fluid'>
+  {{#each data}}
+    <li class='row'>
+      <a id='info-link' href="/blog/{{this.id}}">Click for more info</a>
+      <h3>{{this.title}}</h3>
+      <br>
+      <h6>By: {{this.username}}</h6>
+      <br>
+      <p>{{this.content}}</p>
+      <br>
+      <!-- <p>Comment: {{this.body}}</p> -->
+      <br><br><br><br><br>
+    </li>
+  {{/each}}
+</ul>

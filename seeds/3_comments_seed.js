@@ -12,9 +12,10 @@ exports.seed = function(knex, Promise) {
       var posts = data[1];
       return Promise.all([
         // Inserts seed entries
-        knex('comment').insert({content: 'Life is weird.', user_id: users[0].id, post_id: posts[0].id }),
-        knex('comment').insert({content: 'Beauty is everywhere.', user_id: users[1].id, post_id: posts[1].id }),
-        knex('comment').insert({content: 'I cant spell for some reason', user_id: users[2].id, post_id: posts[2].id })
+        knex('comment').insert({body: 'Brad, its not life thats weird.. its you', user_id: users[0].id, post_id: posts[0].id }),
+        knex('comment').insert({body: 'Comment #2', user_id: users[0].id, post_id: posts[0].id }),
+        knex('comment').insert({body: 'Beauty is indeed everywhere.. Especially in your eyes', user_id: users[1].id, post_id: posts[1].id }),
+        knex('comment').insert({body: 'Yeah bennett we get it you cant spell', user_id: users[2].id, post_id: posts[2].id })
       ]);
     });
 };

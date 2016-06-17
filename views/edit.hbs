@@ -1,0 +1,19 @@
+<div class='container'>
+  <div class='row col-lg-4 col-lg-offset-4'>
+    <br><br>
+    <h2>Blog it!</h2>
+    <br><br>
+    <form method='POST' action='/blog/{{post.id}}/edit?_method=PUT'>
+      <fieldset class="form-group">
+        <label for="title">Title for blogPost</label>
+        <input value='{{post.title}}' type="text" name='title' class="form-control" id="title" placeholder="Enter Title">
+      </fieldset>
+      <fieldset class="form-group">
+        <label value='{{post.content}}' for="content">Post Content</label>
+        <textarea class="form-control" name='content' id="description" rows="3"></textarea>
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+    <br><br>
+  </div>
+</div>
