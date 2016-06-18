@@ -56,6 +56,18 @@ router.get('/:id', function(request, response) {
   });
 });
 
+router.post('/:id', function(request, response) {
+  console.log(request.body);
+  knex('comment').insert({
+      body: request.body.body,
+      post_id: request.body.post_id,
+      user_id: request.body.user_id
+    })
+  .then(function() {
+    response.redirect('/blog');
+  });
+});
+
 router.post('/add', function(request, response) {
   //grab info from body
   knex('users').first().returning('id').insert({ username: request.body.username })

@@ -1,15 +1,33 @@
 
 <!-- Details Page -->
+<div class='row col-lg-6'>
+  <h3>{{post.title}}</h3>
+  <br>
+  <a class='home-edit-delete' href="/blog">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a class='home-edit-delete' href="/blog/{{post.id}}/edit">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a class='home-edit-delete' href="/blog/{{post.id}}/delete">Delete</a>
+  <br><br><br>
+  <img src="{{post.image}}" alt="image" />
+  <br><br><br>
+  <p>{{post.content}}</p>
+  <p>{{post.username}}</p>
+  <br>
 
-<h3>{{post.title}}</h3>
-<br>
-<a class='home-edit-delete' href="/blog">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a class='home-edit-delete' href="/blog/{{post.id}}/edit">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a class='home-edit-delete' href="/blog/{{post.id}}/delete">Delete</a>
-<br><br><br>
-<img src="{{post.image}}" alt="image" />
-<br><br><br>
-<p>{{post.content}}</p>
-<p>{{post.username}}</p>
-<h3>Comments</h3>
-{{post.body}}
+  <!-- Form -->
+  <form method='POST' action='/blog/{{post.id}}'>
+
+    <input type='hidden' name='post_id' value='{{post.id}}'>
+    <input type='hidden' name='user_id' value='{{post.user_id}}'>
+
+    <fieldset class="form-group">
+      <label for="body">Leave a comment</label>
+      <textarea class="form-control" name='body' id="body" rows="3"></textarea>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Post</button>
+  </form>
+
+</div>
+<div class='col-lg-6'>
+  <h3>Comments</h3>
+  {{post.body}}
+</div>
