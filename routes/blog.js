@@ -45,16 +45,15 @@ router.get('/:id/delete', function(request, response) {
 
 // where i want the comments
 router.get('/:id', function(request, response) {
-  knex('users')
-    .join('post', 'users.id', 'post.user_id')
-    .select()
-  .then(function(data) {
-    return knex('post').where({ id: request.params.id }).first()
-  .then(function(post){
-    response.render('details', {post: post});
+    knex('users')
+      .join('post', 'users.id', 'post.user_id')
+      .join('comment', 'post.id', 'comment.post_id')
+      .select()
+      .where({ post_id: request.params.id }).first()
+    .then(function(data) {
+      console.log(data);
+      response.render('details', {post: data});
   });
-});
-
 });
 
 router.post('/add', function(request, response) {
