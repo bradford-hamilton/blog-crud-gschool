@@ -2,6 +2,7 @@ body {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #ffeccf;
+  text-align: center;
 }
 
 /* Nav */
@@ -25,4 +26,21 @@ body {
 
 a {
   color: #00B7FF;
+}
+
+img {
+  max-width: 400px;
+  max-height: 400px;
+}
+
+#add-link {
+  font-size: 2.7rem;
+  color: #d53328
+}
+
+.home-edit-delete {
+  font-size: 1.5rem;
+  color: #c62212;
+  border: 1.5px solid black;
+  padding: .6rem;
 }

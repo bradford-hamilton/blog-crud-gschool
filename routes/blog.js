@@ -9,7 +9,6 @@ router.get('/', function(request, response) {
     .join('post', 'users.id', 'post.user_id')
     .select()
     .then(function(data) {
-      console.log(data);
       response.render('blog', {data: data});
     });
 });
@@ -46,10 +45,16 @@ router.get('/:id/delete', function(request, response) {
 
 // where i want the comments
 router.get('/:id', function(request, response) {
-  knex('post').where({ id: request.params.id }).first()
-    .then(function(post){
-      response.render('details', {post: post});
-    });
+  knex('users')
+    .join('post', 'users.id', 'post.user_id')
+    .select()
+  .then(function(data) {
+    return knex('post').where({ id: request.params.id }).first()
+  .then(function(post){
+    response.render('details', {post: post});
+  });
+});
+
 });
 
 router.post('/add', function(request, response) {
@@ -57,7 +62,11 @@ router.post('/add', function(request, response) {
   knex('users').first().returning('id').insert({ username: request.body.username })
 
     .then(function(userid) {
-      return knex('post').insert({ title: request.body.title, content: request.body.content, user_id: userid[0] });
+      return knex('post').insert({
+        title: request.body.title,
+        image: request.body.image,
+        content: request.body.content,
+        user_id: userid[0] });
     })
     .then(function() {
       response.redirect('/blog');

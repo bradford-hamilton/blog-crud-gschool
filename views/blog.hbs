@@ -1,16 +1,19 @@
 <h1>Blogs</h1>
+<br><br>
+<a id='add-link' href="/blog/add">Add a blog post!</a>
 <br><br><br><br>
 <ul class='container-fluid'>
   {{#each data}}
     <li class='row'>
-      <a id='info-link' href="/blog/{{this.id}}">Click for more info</a>
       <h3>{{this.title}}</h3>
       <br>
-      <h6>By: {{this.username}}</h6>
+      <img src="{{this.image}}" alt="" />
       <br>
-      <p>{{this.content}}</p>
+      <h6>{{this.content}}</h6>
       <br>
-      <!-- <p>Comment: {{this.body}}</p> -->
+      <p>- {{this.username}}</p>
+      <br>
+      <a id='info-link' href="/blog/{{this.id}}">Click for more info</a>
       <br><br><br><br><br>
     </li>
   {{/each}}

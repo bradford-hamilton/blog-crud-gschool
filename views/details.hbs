@@ -3,7 +3,11 @@
 
 <h3>{{post.title}}</h3>
 <br>
+<a class='home-edit-delete' href="/blog">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a class='home-edit-delete' href="/blog/{{post.id}}/edit">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a class='home-edit-delete' href="/blog/{{post.id}}/delete">Delete</a>
+<br><br><br>
+<img src="{{post.image}}" alt="image" />
+<br><br><br>
 <p>{{post.content}}</p>
-<a href="/blog">Home</a>
-<a href="/blog/{{post.id}}/edit">Edit</a>
-<a href="/blog/{{post.id}}/delete">Delete</a>
+<p>{{post.username}}</p>
