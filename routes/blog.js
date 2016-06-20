@@ -31,7 +31,6 @@ router.put('/:id/edit', function(request, response) {
     });
 });
 
-//update/delete violates foreign key constraint
 router.get('/:id/delete', function(request, response) {
     knex('comment').where({ post_id: request.params.id }).del()
   .then(function() {
@@ -42,6 +41,26 @@ router.get('/:id/delete', function(request, response) {
 });
 
 });
+
+router.post('/add', function(request, response) {
+  knex('users').returning('id').insert({ username: request.body.username })
+    .then(function(userid) {
+      console.log(userid);
+      return knex('post').insert({
+        title: request.body.title,
+        image: request.body.image,
+        content: request.body.content,
+        user_id: userid[0]
+      });
+    })
+    .then(function() {
+      response.redirect('/blog');
+    })
+    .catch(function(error) {
+      next(error);
+    });
+});
+
 
 // where i want the comments
 router.get('/:id', function(request, response) {
@@ -57,14 +76,13 @@ router.get('/:id', function(request, response) {
                                    username: data[0].username,
                                    title: data[0].title,
                                    content: data[0].content,
-                                   thepostid: data[0].id,
+                                   thepostid: data[0].post_id,
                                    theuserid: data[0].user_id
                                  });
   });
 });
 
 router.post('/:id', function(request, response) {
-  console.log(request.body);
   knex('comment').insert({
       body: request.body.body,
       post_id: request.body.post_id,
@@ -75,22 +93,5 @@ router.post('/:id', function(request, response) {
   });
 });
 
-router.post('/add', function(request, response) {
-  //grab info from body
-  knex('users').first().returning('id').insert({ username: request.body.username })
-    .then(function(userid) {
-      return knex('post').insert({
-        title: request.body.title,
-        image: request.body.image,
-        content: request.body.content,
-        user_id: userid[0] });
-    })
-    .then(function() {
-      response.redirect('/blog');
-    })
-    .catch(function(error) {
-      next(error);
-    });
-});
 
 module.exports = router;
