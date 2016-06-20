@@ -1,16 +1,16 @@
 
 <!-- Details Page -->
 <div class='row col-lg-6'>
-  <h3>{{post.title}}</h3>
+  <h3>{{title}}</h3>
   <br>
   <a class='home-edit-delete' href="/blog">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a class='home-edit-delete' href="/blog/{{post.id}}/edit">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a class='home-edit-delete' href="/blog/{{post.id}}/delete">Delete</a>
   <br><br><br>
-  <img src="{{post.image}}" alt="image" />
+  <img src="{{image}}" alt="image" />
   <br><br><br>
-  <p>{{post.content}}</p>
-  <p>{{post.username}}</p>
+  <p>{{content}}</p>
+  <p>{{username}}</p>
   <br>
 
   <!-- Form -->
@@ -29,5 +29,11 @@
 </div>
 <div class='col-lg-6'>
   <h3>Comments</h3>
-  {{post.body}}
+  <ol>
+    {{#each post}}
+    <li>
+      {{this.body}}
+    </li>
+    {{/each}}
+  </ol>
 </div>

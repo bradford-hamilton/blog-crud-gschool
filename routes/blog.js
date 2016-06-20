@@ -49,10 +49,15 @@ router.get('/:id', function(request, response) {
       .join('post', 'users.id', 'post.user_id')
       .join('comment', 'post.id', 'comment.post_id')
       .select()
-      .where({ post_id: request.params.id }).first()
+      .where({ post_id: request.params.id })
     .then(function(data) {
       console.log(data);
-      response.render('details', {post: data});
+      response.render('details', {post: data,
+                                  image: data[0].image,
+                                  username: data[0].username,
+                                  title: data[0].title,
+                                  content: data[0].content
+                                });
   });
 });
 
