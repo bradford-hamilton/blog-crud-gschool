@@ -64,11 +64,11 @@ router.post('/add', function(request, response) {
 
 // where i want the comments
 router.get('/:id', function(request, response) {
-    knex('users')
-      .join('post', 'users.id', 'post.user_id')
-      .join('comment', 'post.id', 'comment.post_id')
-      .select()
-      .where({ post_id: request.params.id })
+    knex('post')
+      .leftJoin('comment', 'post.id', 'comment.post_id')
+      .join('users', 'users.id', 'post.user_id')
+      .select(['post.title', 'post.content', 'post.user_id', 'post.image', 'users.username', 'comment.body', 'post.id'])
+      .where({ 'post.id': request.params.id })
     .then(function(data) {
       console.log(data);
       response.render('details', { post: data,
@@ -76,13 +76,14 @@ router.get('/:id', function(request, response) {
                                    username: data[0].username,
                                    title: data[0].title,
                                    content: data[0].content,
-                                   thepostid: data[0].post_id,
+                                   thepostid: data[0].id,
                                    theuserid: data[0].user_id
                                  });
   });
 });
 
 router.post('/:id', function(request, response) {
+  console.log(request.body);
   knex('comment').insert({
       body: request.body.body,
       post_id: request.body.post_id,
