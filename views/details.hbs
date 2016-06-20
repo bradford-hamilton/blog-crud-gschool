@@ -4,8 +4,8 @@
   <h3>{{title}}</h3>
   <br>
   <a class='home-edit-delete' href="/blog">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class='home-edit-delete' href="/blog/{{post.id}}/edit">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class='home-edit-delete' href="/blog/{{post.id}}/delete">Delete</a>
+  <a class='home-edit-delete' href="/blog/{{thepostid}}/edit">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a class='home-edit-delete' href="/blog/{{thepostid}}/delete">Delete</a>
   <br><br><br>
   <img src="{{image}}" alt="image" />
   <br><br><br>
@@ -14,10 +14,10 @@
   <br>
 
   <!-- Form -->
-  <form method='POST' action='/blog/{{post.id}}'>
+  <form method='POST' action='/blog/{{thepostid}}'>
 
-    <input type='hidden' name='post_id' value='{{post.id}}'>
-    <input type='hidden' name='user_id' value='{{post.user_id}}'>
+    <input type='hidden' name='post_id' value='{{thepostid}}'>
+    <input type='hidden' name='user_id' value='{{theuserid}}'>
 
     <fieldset class="form-group">
       <label for="body">Leave a comment</label>
@@ -25,6 +25,7 @@
     </fieldset>
     <button type="submit" class="btn btn-primary">Post</button>
   </form>
+  <!-- Form end -->
 
 </div>
 <div class='col-lg-6'>

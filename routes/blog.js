@@ -20,7 +20,7 @@ router.get('/add', function(request, response) {
 router.get('/:id/edit', function(request, response) {
   knex('post').where({ id: request.params.id }).first()
     .then(function(post) {
-      response.render('edit', { post: post});
+      response.render('edit', { post: post });
     });
 });
 
@@ -52,12 +52,14 @@ router.get('/:id', function(request, response) {
       .where({ post_id: request.params.id })
     .then(function(data) {
       console.log(data);
-      response.render('details', {post: data,
-                                  image: data[0].image,
-                                  username: data[0].username,
-                                  title: data[0].title,
-                                  content: data[0].content
-                                });
+      response.render('details', { post: data,
+                                   image: data[0].image,
+                                   username: data[0].username,
+                                   title: data[0].title,
+                                   content: data[0].content,
+                                   thepostid: data[0].id,
+                                   theuserid: data[0].user_id
+                                 });
   });
 });
 
@@ -69,14 +71,13 @@ router.post('/:id', function(request, response) {
       user_id: request.body.user_id
     })
   .then(function() {
-    response.redirect('/blog');
+    response.redirect('/blog/' + request.body.post_id);
   });
 });
 
 router.post('/add', function(request, response) {
   //grab info from body
   knex('users').first().returning('id').insert({ username: request.body.username })
-
     .then(function(userid) {
       return knex('post').insert({
         title: request.body.title,
